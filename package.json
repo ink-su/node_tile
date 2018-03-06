@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "todo"
   },
   "repository": {
@@ -18,6 +19,12 @@
   "homepage": "https://github.com/ink-su/node_tile#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0"
   }
 }
