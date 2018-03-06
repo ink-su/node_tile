@@ -1,0 +1,23 @@
+{
+  "name": "node_tile",
+  "description": "Node OSM",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "todo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ink-su/node_tile.git"
+  },
+  "author": "ink-su",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/ink-su/node_tile/issues"
+  },
+  "homepage": "https://github.com/ink-su/node_tile#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2"
+  }
+}
