@@ -1,15 +1,12 @@
 'use-strict';
 
 const express = require('express');
-const tileService = require('./lib/tileService');
 
-const app = express();
+const tileService = require('./tileService');
 
-app.get('/status', (req, res) => {
-  res.send('It\'s working');
-});
+const router = express.Router();
 
-app.get('/tile/:z/:x/:y', (req, res) => {
+router.get('/:z/:x/:y', (req, res) => {
   const { x, y, z } = req.params;
   tileService.generateTile(x, y, z)
     .then((resp) => {
@@ -20,7 +17,7 @@ app.get('/tile/:z/:x/:y', (req, res) => {
     });
 });
 
-app.delete('/tile/:z/:x/:y', (req, res) => {
+router.delete('/:z/:x/:y', (req, res) => {
   const { x, y, z } = req.params;
   tileService.expireTile(x, y, z)
     .then((resp) => {
@@ -31,4 +28,4 @@ app.delete('/tile/:z/:x/:y', (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+module.exports = router;
