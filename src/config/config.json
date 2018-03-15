@@ -4,6 +4,7 @@
   },
   "renderd": {
     "metatile": 8,
+    "maxzoom": 22,
     "tilepath": "./output/tiles",
     "mapgroup": "default"
   }
