@@ -20,4 +20,4 @@ app.use('/api/v1/tile/', tileRoute);
 app.use('/status', statusRoute);
 
 const serverPort = nconf.get('server:port');
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+app.listen(serverPort, () => console.log(`Example app listening on port ${serverPort}!`));
