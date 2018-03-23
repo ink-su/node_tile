@@ -28,7 +28,6 @@ function loadTile() {
     });
 }
 
-
 function getFileName(x, y, z) {
   const hash = [];
   let xBit = x & mask;
@@ -41,8 +40,10 @@ function getFileName(x, y, z) {
   return `${TILEPATH}/${MAPGROUP}/${z}/${hash[4]}/${hash[3]}/${hash[2]}/${hash[1]}/${hash[0]}.meta`;
 }
 
-const renderd = {
+
+const renderService = {
   loadTile,
   getFileName,
+  getTileSize: z => Math.min(METATILE, 1 << z),
 };
-module.exports = renderd;
+module.exports = renderService;

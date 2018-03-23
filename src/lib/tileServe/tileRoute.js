@@ -11,9 +11,6 @@ router.get('/:z/:x/:y', (req, res) => {
   tileService.generateTile(x, y, z)
     .then((resp) => {
       res.send(resp);
-    })
-    .catch((resp) => {
-      res.send(resp);
     });
 });
 
@@ -21,9 +18,6 @@ router.delete('/:z/:x/:y', (req, res) => {
   const { x, y, z } = req.params;
   tileService.expireTile(x, y, z)
     .then((resp) => {
-      res.send(resp);
-    })
-    .catch((resp) => {
       res.send(resp);
     });
 });
