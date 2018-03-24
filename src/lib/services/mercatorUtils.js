@@ -51,9 +51,9 @@ const getBotLeftPixel = (x, y, size) => [x * tileSize, (y + size) * tileSize];
 
 const getTopRightPixel = (x, y, size) => [(x + size) * tileSize, y * tileSize];
 
-const getEnvelope = (x, y, size) => {
-  const botLeftCoord = pixelToLatLong(getBotLeftPixel(x, y, size));
-  const topRightCoord = pixelToLatLong(getTopRightPixel(x, y, size));
+const getEnvelope = (x, y, z, size) => {
+  const botLeftCoord = pixelToLatLong(getBotLeftPixel(x, y, size), z);
+  const topRightCoord = pixelToLatLong(getTopRightPixel(x, y, size), z);
   const boundingBox = [botLeftCoord[0], botLeftCoord[1], topRightCoord[0], topRightCoord[1]];
   return mercator.forward(boundingBox);
 };
@@ -64,6 +64,7 @@ const mercatorUtils = {
   getBotLeftPixel,
   getTopRightPixel,
   getEnvelope,
+  proj4,
 };
 
 module.exports = mercatorUtils;

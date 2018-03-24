@@ -3,4 +3,7 @@ module.exports = {
     "parserOptions": {
         "sourceType": "script",
     },
+    "rules": {
+        "max-len": "warn",
+    },
 };

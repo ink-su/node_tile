@@ -3,6 +3,8 @@
 const nconf = require('nconf');
 const bluebird = require('bluebird');
 const mapnik = bluebird.promisifyAll(require('mapnik'));
+const mercatorUtils = require('./mercatorUtils');
+const datasource = require('./datasourceService');
 /* eslint no-bitwise: 0 */
 
 // register fonts and datasource plugins
@@ -16,15 +18,47 @@ const METATILE = nconf.get('renderd:metatile');
 const TILEPATH = nconf.get('renderd:tilepath');
 const MAPGROUP = nconf.get('renderd:mapgroup');
 
+const stylesheet = nconf.get('renderd:stylesheet');
+
 const mask = ~(METATILE - 1);
 
-function loadTile() {
-  return new mapnik.Map(256, 256).load(nconf.get('renderd:stylesheet'))
-    .then((map) => {
+function splitImage(image, size, format = 'png256') {
+  const tiles = [];
+  const requiredTiles = [];
+  for (let x = 0; x < size; x += 1) {
+    tiles[x] = [];
+    for (let y = 0; y < size; y += 1) {
+      requiredTiles.push([x, y]);
+    }
+  }
+  return bluebird.map(requiredTiles, xy =>
+    image.view(xy[0] * 256, xy[1] * 256, 256, 256)
+      .encode(format)
+      .then((encoded) => {
+        tiles[xy[0]][xy[0]] = encoded;
+      }))
+    .return(tiles);
+}
 
+function loadTile(boundingBox, size) {
+  const layer = new mapnik.Layer(MAPGROUP, mercatorUtils.proj4);
+  layer.datasource = datasource;
+  layer.styles = ['points'];
+  const mapnikMap = new mapnik.Map(256, 256, mercatorUtils.proj4);
+  mapnikMap.bufferSize = 128;
+  return mapnikMap.load(stylesheet, { strict: true })
+    .then((map) => {
+      map.add_layer(layer);
+      map.extent = boundingBox;
+      const image = new mapnik.Image(map.width * size, map.height * size);
+      return map.render(image);
+    })
+    .then((image) => {
+      splitImage(image);
     })
     .catch((err) => {
       console.log(err);
+      throw err;
     });
 }
 

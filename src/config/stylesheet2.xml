@@ -1,0 +1,16 @@
+<Map srs="' + merc + '">
+<Style name="points">
+ <Rule>
+  <Filter>[POP2005]&gt;200000000</Filter>
+  <MarkersSymbolizer marker-type="ellipse" fill="red" width="10" allow-overlap="true" placement="point"/>
+ </Rule>
+ <Rule>
+  <Filter>[POP2005]&gt;20000000</Filter>
+  <MarkersSymbolizer marker-type="ellipse" fill="green" width="7" allow-overlap="true" placement="point"/>
+ </Rule>
+ <Rule>
+  <ElseFilter />
+  <MarkersSymbolizer marker-type="ellipse" fill="blue" width="5" allow-overlap="true" placement="point"/>
+ </Rule>
+</Style>
+</Map>
