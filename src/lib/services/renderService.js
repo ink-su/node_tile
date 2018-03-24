@@ -40,7 +40,7 @@ function splitImage(image, size, format = 'png256') {
     .return(tiles);
 }
 
-function loadTile(boundingBox, size) {
+function renderTile(boundingBox, size) {
   const layer = new mapnik.Layer(MAPGROUP, mercatorUtils.proj4);
   layer.datasource = datasource;
   layer.styles = ['points'];
@@ -53,9 +53,7 @@ function loadTile(boundingBox, size) {
       const image = new mapnik.Image(map.width * size, map.height * size);
       return map.render(image);
     })
-    .then((image) => {
-      splitImage(image);
-    })
+    .then(image => splitImage(image))
     .catch((err) => {
       console.log(err);
       throw err;
@@ -76,7 +74,7 @@ function getFileName(x, y, z) {
 
 
 const renderService = {
-  loadTile,
+  renderTile,
   getFileName,
   getTileSize: z => Math.min(METATILE, 1 << z),
 };
