@@ -5,7 +5,7 @@
   "renderd": {
     "metatile": 8,
     "maxzoom": 22,
-    "stylesheet": "../../config/stylesheet2.xml",
+    "stylesheet": "./src/config/stylesheet2.xml",
     "tilepath": "./output/tiles",
     "mapgroup": "default"
   }

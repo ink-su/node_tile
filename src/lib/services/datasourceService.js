@@ -2,6 +2,12 @@
 
 const mapnik = require('mapnik');
 
+// register fonts and datasource plugins
+mapnik.register_default_fonts();
+// Register input formats: TODO: in production choose a single one
+// https://github.com/mapnik/node-mapnik/blob/b277f6580876adf6e0a7f579627efe1e082a54e9/src/mapnik_plugins.hpp
+mapnik.register_default_input_plugins();
+
 const datasource = mapnik({
   type: 'shape',
   file: '../../test/mapdata/world_merc',

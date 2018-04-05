@@ -11,7 +11,7 @@ function saveTiles(tiles, x, y, z) {
   const writePromises = [];
   for (let px = 0; px < tiles.length; px += 1) {
     for (let py = 0; py < tiles[px].length; py += 1) {
-      writePromises.push(fs.writeFile(`./output/${x}-${y}-${z}-${px}-${py}.png`, tiles[px][py], 'binary'));
+      writePromises.push(fs.writeFileAsync(`./output/${x}-${y}-${z}-${px}-${py}.png`, tiles[px][py], 'binary'));
     }
   }
   return bluebird.all(writePromises);
